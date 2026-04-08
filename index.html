@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROJECT: MANNY-UP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #05070a; color: white; font-family: sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl font-black mb-2 uppercase italic text-blue-500">Manny-Fest Destiny</h1>
+        <p id="late-clock" class="text-red-500 font-mono mb-12 animate-pulse font-bold">CALCULATING LATENESS...</p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass p-6 rounded-3xl">
+                <img src="IMG_3271.jpg" class="w-full h-64 object-cover rounded-xl mb-4" alt="Manny Batman">
+                <h3 class="text-xl font-bold">Locked In (Rare)</h3>
+            </div>
+            <div class="glass p-6 rounded-3xl">
+                <img src="IMG_2995.jpg" class="w-full h-64 object-cover rounded-xl mb-4" alt="Manny Phone">
+                <h3 class="text-xl font-bold">Standard Operating Mode</h3>
+            </div>
+        </div>
+
+        <div class="mt-12 glass p-8 rounded-3xl border-l-4 border-l-blue-500">
+            <h2 class="text-2xl font-bold mb-4">Why does this website exist?</h2>
+            <p class="text-gray-400">Because Manny is currently <span id="mins-count" class="text-white font-bold">...</span> minutes late to the AI revolution.</p>
+        </div>
+    </div>
+
+    <script>
+        function update() {
+            const now = new Date();
+            const start = new Date();
+            start.setHours(8, 0, 0);
+            const diff = Math.floor((now - start) / 60000);
+            document.getElementById('late-clock').innerText = "STATUS: MANNY IS " + diff + " MINUTES LATE";
+            document.getElementById('mins-count').innerText = diff;
+        }
+        setInterval(update, 1000);
+        update();
+    </script>
+</body>
+</html>

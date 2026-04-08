@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,86 +6,56 @@
     <title>PROJECT: MANNY-UP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #020408; color: #e2e8f0; font-family: sans-serif; overflow-x: hidden; }
-        .neon-text { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
-        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); }
-        .late-glow { box-shadow: 0 0 30px rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); }
+        body { background-color: #020408; color: #e2e8f0; font-family: sans-serif; }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .hero-frame { border: 2px solid #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); }
+        .manny-gradient { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-6 md:p-12">
+<body class="min-h-screen flex flex-col items-center p-6 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900 via-black to-black">
+    <div class="max-w-3xl w-full space-y-8">
+        <div class="text-center mt-10">
+            <h1 class="text-5xl font-black italic uppercase tracking-tighter manny-gradient">Manny-Fest Destiny</h1>
+            <p id="late-clock" class="text-red-500 font-bold mt-2 animate-pulse tracking-widest text-sm">STATUS: CRITICALLY LATE</p>
+        </div>
 
-    <div class="max-w-4xl w-full space-y-8">
-        <div class="flex justify-between items-end border-b border-white/10 pb-6">
-            <div>
-                <h1 class="text-3xl font-black italic tracking-tighter neon-text text-blue-400">PROJECT: MANNY-UP</h1>
-                <p class="text-[10px] tracking-[0.3em] text-gray-500 uppercase">Wichita Tech Division // Case #3434</p>
-            </div>
-            <div class="text-right">
-                <p class="text-red-500 font-bold text-xs animate-pulse">LATE STATUS: CRITICAL</p>
-                <p id="current-time" class="text-lg font-mono text-gray-400">00:00:00</p>
+        <div class="glass hero-frame rounded-[2.5rem] overflow-hidden relative">
+            <img src="IMG_3271.jpeg" class="w-full h-[450px] object-cover opacity-90" alt="Manny Batman">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#020408] to-transparent opacity-60"></div>
+            <div class="absolute bottom-8 left-8">
+                <p class="text-[10px] tracking-[0.3em] text-blue-400 font-bold uppercase mb-1">Current Shift Deficit</p>
+                <h2 class="text-5xl font-black italic"><span id="mins-count">...</span> MINS</h2>
             </div>
         </div>
 
-        <div class="relative glass rounded-[2.5rem] overflow-hidden late-glow">
-            <img src="IMG_3271.jpg" id="hero-img" class="w-full h-[500px] object-cover opacity-80" alt="Manny Batman">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#020408] via-transparent to-transparent"></div>
-            
-            <div class="absolute bottom-10 left-10">
-                <h2 class="text-5xl font-black italic mb-2 uppercase">The 8:00 AM Myth</h2>
-                <div class="flex items-center gap-4">
-                    <p class="text-blue-400 font-bold text-sm tracking-widest uppercase">Manny is <span id="mins-count" class="text-white text-xl">...</span> Minutes Late</p>
-                </div>
-            </div>
-
-            <button onclick="toggleMode(this)" class="absolute top-8 right-8 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full text-xs font-black tracking-widest transition-all shadow-2xl">
-                ACTIVATE AI MANNY
-            </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="glass p-8 rounded-3xl flex items-center gap-6">
-                <img src="IMG_2995.jpg" class="w-24 h-24 rounded-2xl object-cover grayscale hover:grayscale-0 transition duration-500" alt="Phone Manny">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="glass p-6 rounded-3xl flex items-center gap-6 border-l-4 border-l-blue-500">
+                <img src="IMG_2995.jpeg" class="w-20 h-20 rounded-2xl object-cover" alt="Phone Manny">
                 <div>
-                    <h4 class="text-xs uppercase text-gray-500 font-bold mb-1">Detected Activity</h4>
-                    <p class="text-2xl font-bold italic text-blue-300">"Leaving in 5"</p>
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Est. Arrival</p>
+                    <p class="text-xl font-bold italic">"Next Year"</p>
                 </div>
             </div>
-            <div class="glass p-8 rounded-3xl border-t-2 border-red-500/30">
-                <h4 class="text-xs uppercase text-gray-500 font-bold mb-1">Flooring Progress</h4>
-                <div class="w-full bg-gray-800 h-2 mt-3 rounded-full overflow-hidden">
-                    <div class="bg-red-500 h-full w-[2%]"></div>
-                </div>
-                <p class="text-right text-[10px] mt-2 text-red-500 font-bold uppercase">Stalled</p>
+            <div class="glass p-6 rounded-3xl flex flex-col justify-center items-center border-t border-white/5">
+                <p class="text-red-500 font-black text-2xl uppercase italic">Efficiency: 0%</p>
+                <p class="text-[10px] text-gray-600 uppercase tracking-widest mt-1">Status: Disconnected</p>
             </div>
         </div>
+        
+        <p class="text-center text-[10px] text-gray-700 tracking-[0.5em] uppercase">Built in Wichita for the JCR Flooring Intervention</p>
     </div>
 
     <script>
         function update() {
             const now = new Date();
-            document.getElementById('current-time').innerText = now.toLocaleTimeString();
             const start = new Date();
             start.setHours(8, 0, 0);
             const diff = Math.floor((now - start) / 60000);
             document.getElementById('mins-count').innerText = diff > 0 ? diff : 0;
+            document.getElementById('late-clock').innerText = "STATUS: MANNY IS " + diff + " MINUTES LATE";
         }
         setInterval(update, 1000);
         update();
-
-        let isAI = false;
-        function toggleMode(btn) {
-            const img = document.getElementById('hero-img');
-            isAI = !isAI;
-            if(isAI) {
-                img.style.filter = "hue-rotate(150deg) brightness(1.1) contrast(1.2)";
-                btn.innerText = "RESTORE MANUAL MANNY";
-                btn.style.background = "#22c55e";
-            } else {
-                img.style.filter = "none";
-                btn.innerText = "ACTIVATE AI MANNY";
-                btn.style.background = "#2563eb";
-            }
-        }
     </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,43 +6,86 @@
     <title>PROJECT: MANNY-UP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #05070a; color: white; font-family: sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        body { background-color: #020408; color: #e2e8f0; font-family: sans-serif; overflow-x: hidden; }
+        .neon-text { text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); }
+        .late-glow { box-shadow: 0 0 30px rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3); }
     </style>
 </head>
-<body class="p-8">
-    <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-4xl font-black mb-2 uppercase italic text-blue-500">Manny-Fest Destiny</h1>
-        <p id="late-clock" class="text-red-500 font-mono mb-12 animate-pulse font-bold">CALCULATING LATENESS...</p>
+<body class="min-h-screen flex flex-col items-center p-6 md:p-12">
 
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass p-6 rounded-3xl">
-                <img src="IMG_3271.jpg" class="w-full h-64 object-cover rounded-xl mb-4" alt="Manny Batman">
-                <h3 class="text-xl font-bold">Locked In (Rare)</h3>
+    <div class="max-w-4xl w-full space-y-8">
+        <div class="flex justify-between items-end border-b border-white/10 pb-6">
+            <div>
+                <h1 class="text-3xl font-black italic tracking-tighter neon-text text-blue-400">PROJECT: MANNY-UP</h1>
+                <p class="text-[10px] tracking-[0.3em] text-gray-500 uppercase">Wichita Tech Division // Case #3434</p>
             </div>
-            <div class="glass p-6 rounded-3xl">
-                <img src="IMG_2995.jpg" class="w-full h-64 object-cover rounded-xl mb-4" alt="Manny Phone">
-                <h3 class="text-xl font-bold">Standard Operating Mode</h3>
+            <div class="text-right">
+                <p class="text-red-500 font-bold text-xs animate-pulse">LATE STATUS: CRITICAL</p>
+                <p id="current-time" class="text-lg font-mono text-gray-400">00:00:00</p>
             </div>
         </div>
 
-        <div class="mt-12 glass p-8 rounded-3xl border-l-4 border-l-blue-500">
-            <h2 class="text-2xl font-bold mb-4">Why does this website exist?</h2>
-            <p class="text-gray-400">Because Manny is currently <span id="mins-count" class="text-white font-bold">...</span> minutes late to the AI revolution.</p>
+        <div class="relative glass rounded-[2.5rem] overflow-hidden late-glow">
+            <img src="IMG_3271.jpg" id="hero-img" class="w-full h-[500px] object-cover opacity-80" alt="Manny Batman">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#020408] via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-10 left-10">
+                <h2 class="text-5xl font-black italic mb-2 uppercase">The 8:00 AM Myth</h2>
+                <div class="flex items-center gap-4">
+                    <p class="text-blue-400 font-bold text-sm tracking-widest uppercase">Manny is <span id="mins-count" class="text-white text-xl">...</span> Minutes Late</p>
+                </div>
+            </div>
+
+            <button onclick="toggleMode(this)" class="absolute top-8 right-8 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full text-xs font-black tracking-widest transition-all shadow-2xl">
+                ACTIVATE AI MANNY
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass p-8 rounded-3xl flex items-center gap-6">
+                <img src="IMG_2995.jpg" class="w-24 h-24 rounded-2xl object-cover grayscale hover:grayscale-0 transition duration-500" alt="Phone Manny">
+                <div>
+                    <h4 class="text-xs uppercase text-gray-500 font-bold mb-1">Detected Activity</h4>
+                    <p class="text-2xl font-bold italic text-blue-300">"Leaving in 5"</p>
+                </div>
+            </div>
+            <div class="glass p-8 rounded-3xl border-t-2 border-red-500/30">
+                <h4 class="text-xs uppercase text-gray-500 font-bold mb-1">Flooring Progress</h4>
+                <div class="w-full bg-gray-800 h-2 mt-3 rounded-full overflow-hidden">
+                    <div class="bg-red-500 h-full w-[2%]"></div>
+                </div>
+                <p class="text-right text-[10px] mt-2 text-red-500 font-bold uppercase">Stalled</p>
+            </div>
         </div>
     </div>
 
     <script>
         function update() {
             const now = new Date();
+            document.getElementById('current-time').innerText = now.toLocaleTimeString();
             const start = new Date();
             start.setHours(8, 0, 0);
             const diff = Math.floor((now - start) / 60000);
-            document.getElementById('late-clock').innerText = "STATUS: MANNY IS " + diff + " MINUTES LATE";
-            document.getElementById('mins-count').innerText = diff;
+            document.getElementById('mins-count').innerText = diff > 0 ? diff : 0;
         }
         setInterval(update, 1000);
         update();
+
+        let isAI = false;
+        function toggleMode(btn) {
+            const img = document.getElementById('hero-img');
+            isAI = !isAI;
+            if(isAI) {
+                img.style.filter = "hue-rotate(150deg) brightness(1.1) contrast(1.2)";
+                btn.innerText = "RESTORE MANUAL MANNY";
+                btn.style.background = "#22c55e";
+            } else {
+                img.style.filter = "none";
+                btn.innerText = "ACTIVATE AI MANNY";
+                btn.style.background = "#2563eb";
+            }
+        }
     </script>
 </body>
 </html>

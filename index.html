@@ -3,57 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJECT: MANNY-UP</title>
+    <title>PROJECT: MANNY-UP V2.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #020408; color: #e2e8f0; font-family: sans-serif; }
+        body { background-color: #020408; color: #e2e8f0; font-family: sans-serif; overflow-x: hidden; }
         .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
         .hero-frame { border: 2px solid #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); }
         .manny-gradient { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .progress-bar { transition: width 1s ease-in-out; }
+        @keyframes flash { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .critical { animation: flash 1s infinite; color: #ef4444; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-6 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900 via-black to-black">
-    <div class="max-w-3xl w-full space-y-8">
-        <div class="text-center mt-10">
-            <h1 class="text-5xl font-black italic uppercase tracking-tighter manny-gradient">Manny-Fest Destiny</h1>
-            <p id="late-clock" class="text-red-500 font-bold mt-2 animate-pulse tracking-widest text-sm">STATUS: CRITICALLY LATE</p>
+<body class="min-h-screen flex flex-col items-center p-4 bg-black">
+    <div class="max-w-3xl w-full space-y-6">
+        
+        <div class="text-center mt-6">
+            <h1 class="text-4xl font-black italic uppercase manny-gradient">Manny-Fest Destiny 2.0</h1>
+            <div class="flex justify-center gap-4 mt-2">
+                <p id="late-clock" class="text-[10px] font-bold tracking-[0.3em] uppercase"></p>
+            </div>
+        </div>
+
+        <div class="glass p-4 rounded-2xl">
+            <div class="flex justify-between text-[10px] uppercase font-bold mb-2 tracking-widest text-gray-500">
+                <span>Shift Progress</span>
+                <span id="percent-label">0% Missed</span>
+            </div>
+            <div class="w-full bg-gray-900 h-3 rounded-full overflow-hidden border border-white/5">
+                <div id="progress-fill" class="progress-bar h-full bg-gradient-to-r from-blue-600 to-red-600" style="width: 0%"></div>
+            </div>
         </div>
 
         <div class="glass hero-frame rounded-[2.5rem] overflow-hidden relative">
-            <img src="IMG_3271.jpeg" class="w-full h-[450px] object-cover opacity-90" alt="Manny Batman">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#020408] to-transparent opacity-60"></div>
-            <div class="absolute bottom-8 left-8">
-                <p class="text-[10px] tracking-[0.3em] text-blue-400 font-bold uppercase mb-1">Current Shift Deficit</p>
-                <h2 class="text-5xl font-black italic"><span id="mins-count">...</span> MINS</h2>
+            <img src="IMG_3271.jpeg" id="hero-img" class="w-full h-[400px] object-cover opacity-90 transition-all duration-500" alt="Manny Batman">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-6 left-6">
+                <h2 id="excuse-text" class="text-2xl font-black italic uppercase leading-tight text-white mb-1">"I'm 5 Minutes Away"</h2>
+                <p class="text-[10px] tracking-[0.3em] text-blue-400 font-bold uppercase">Manny-Logic Generator Active</p>
+            </div>
+
+            <button onclick="upgradeManny()" class="absolute top-6 right-6 bg-blue-600 hover:bg-white hover:text-black text-white px-5 py-2 rounded-full text-[10px] font-black tracking-widest transition-all">
+                GENERATE EXCUSE
+            </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <div class="glass p-5 rounded-3xl border-l-4 border-l-blue-500">
+                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Total Deficit</p>
+                <h2 class="text-3xl font-black italic"><span id="mins-count">0</span>m</h2>
+            </div>
+            <div class="glass p-5 rounded-3xl border-l-4 border-l-red-500">
+                <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Phone Battery</p>
+                <h2 class="text-3xl font-black italic text-red-500">1%</h2>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="glass p-6 rounded-3xl flex items-center gap-6 border-l-4 border-l-blue-500">
-                <img src="IMG_2995.jpeg" class="w-20 h-20 rounded-2xl object-cover" alt="Phone Manny">
-                <div>
-                    <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Est. Arrival</p>
-                    <p class="text-xl font-bold italic">"Next Year"</p>
-                </div>
-            </div>
-            <div class="glass p-6 rounded-3xl flex flex-col justify-center items-center border-t border-white/5">
-                <p class="text-red-500 font-black text-2xl uppercase italic">Efficiency: 0%</p>
-                <p class="text-[10px] text-gray-600 uppercase tracking-widest mt-1">Status: Disconnected</p>
-            </div>
+        <div class="text-center pb-10">
+            <button onclick="window.location.reload()" class="text-[10px] text-gray-600 hover:text-blue-400 transition tracking-[0.4em] uppercase">
+                Sync with Wichita HQ
+            </button>
         </div>
-        
-        <p class="text-center text-[10px] text-gray-700 tracking-[0.5em] uppercase">Built in Wichita for the JCR Flooring Intervention</p>
     </div>
 
     <script>
+        const excuses = [
+            "I'm 5 minutes away (actually in bed)",
+            "My phone didn't charge last night",
+            "Had to stop for gas real quick",
+            "Traffic on Kellogg is crazy right now",
+            "I thought we were starting at 9",
+            "I'm literally pulling up (2 miles out)",
+            "My alarm didn't go off",
+            "I'm locked in, just wait"
+        ];
+
+        function upgradeManny() {
+            // Excuse Generator
+            const randomExcuse = excuses[Math.floor(Math.random() * excuses.length)];
+            document.getElementById('excuse-text').innerText = `"${randomExcuse}"`;
+            
+            // Visual Flare
+            const img = document.getElementById('hero-img');
+            img.style.filter = "hue-rotate(" + Math.random() * 360 + "deg) brightness(1.2)";
+            setTimeout(() => { img.style.filter = "none"; }, 500);
+        }
+
         function update() {
             const now = new Date();
             const start = new Date();
             start.setHours(8, 0, 0);
-            const diff = Math.floor((now - start) / 60000);
-            document.getElementById('mins-count').innerText = diff > 0 ? diff : 0;
-            document.getElementById('late-clock').innerText = "STATUS: MANNY IS " + diff + " MINUTES LATE";
+            
+            const end = new Date();
+            end.setHours(17, 0, 0); // 5 PM end time
+
+            const totalWorkDay = end - start;
+            const elapsed = now - start;
+            const diffMins = Math.floor(elapsed / 60000);
+            
+            // Minutes Counter
+            document.getElementById('mins-count').innerText = diffMins > 0 ? diffMins : 0;
+            document.getElementById('late-clock').innerText = "System Time: " + now.toLocaleTimeString();
+
+            // Progress Math
+            if (elapsed > 0) {
+                let percent = Math.min(Math.floor((elapsed / totalWorkDay) * 100), 100);
+                document.getElementById('progress-fill').style.width = percent + "%";
+                document.getElementById('percent-label').innerText = percent + "% OF SHIFT MISSED";
+                if(percent > 50) document.getElementById('percent-label').classList.add('critical');
+            }
         }
+
         setInterval(update, 1000);
         update();
     </script>

@@ -3,92 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROJECT: MANNY-UP // AI ASCENSION</title>
+    <title>PROJECT: MANNY-UP // V3.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Inter:wght@400;900&display=swap');
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .syncopate { font-family: 'Syncopate', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .neon-blue { box-shadow: 0 0 30px rgba(56, 189, 248, 0.4); border: 1px solid #38bdf8; }
+        .neon-blue { box-shadow: 0 0 30px rgba(56, 189, 248, 0.3); border: 1px solid #38bdf8; }
         .hidden { display: none; }
-        .scanline { width: 100%; height: 2px; background: rgba(56, 189, 248, 0.2); position: absolute; animation: scan 4s linear infinite; }
+        .scanline { width: 100%; height: 2px; background: rgba(56, 189, 248, 0.1); position: absolute; animation: scan 4s linear infinite; pointer-events: none; }
         @keyframes scan { from { top: 0; } to { top: 100%; } }
     </style>
 </head>
-<body class="p-6">
+<body class="p-4 md:p-10">
 
-    <div id="roast-page" class="max-w-xl mx-auto space-y-8 py-10">
-        <div class="text-center space-y-2">
-            <h1 class="syncopate text-2xl tracking-[0.5em] text-blue-500 uppercase">Status: Unproductive</h1>
-            <p class="text-[10px] tracking-[0.4em] text-gray-500 font-bold uppercase">Wichita Deployment // JCR-001</p>
+    <div id="roast-page" class="max-w-2xl mx-auto space-y-6">
+        <div class="text-center">
+            <h1 class="syncopate text-xl tracking-[0.4em] text-blue-500 uppercase">System Status: Manny</h1>
+            <p class="text-[9px] tracking-[0.5em] text-gray-600 mt-2">JCR FLOORING // WICHITA DIVISION</p>
         </div>
 
-        <div class="relative rounded-3xl overflow-hidden neon-blue group">
-            <div class="scanline"></div>
-            <img src="IMG_3271.jpeg" class="w-full h-[500px] object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" alt="Manny Batman">
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-            <div class="absolute bottom-8 left-8 right-8">
-                <div class="flex justify-between items-end">
-                    <div>
-                        <h2 class="syncopate text-3xl italic mb-1">LOCK IN</h2>
-                        <p class="text-blue-400 font-black text-xs uppercase tracking-widest">Efficiency: <span class="text-white">0.02%</span></p>
-                    </div>
-                    <p id="mins-count" class="text-4xl font-black italic text-red-600">000</p>
-                </div>
+        <div class="glass p-4 rounded-2xl border-t border-white/10">
+            <div class="flex justify-between text-[9px] uppercase font-bold mb-2 tracking-widest text-blue-400">
+                <span>Shift Exposure</span>
+                <span id="percent-label">0% LATE</span>
+            </div>
+            <div class="w-full bg-black h-2 rounded-full overflow-hidden border border-white/5">
+                <div id="progress-fill" class="h-full bg-gradient-to-r from-blue-500 to-red-600 transition-all duration-1000" style="width: 0%"></div>
             </div>
         </div>
 
-        <button onclick="showPage('ai-page')" class="w-full py-6 glass rounded-2xl syncopate text-xs tracking-[0.3em] hover:bg-blue-600 transition-all uppercase">
-            Start AI Training →
+        <div class="relative rounded-[2rem] overflow-hidden neon-blue group">
+            <div class="scanline"></div>
+            <img src="IMG_3271.jpeg" id="hero-img" class="w-full h-[400px] object-cover transition-all duration-700 brightness-75 group-hover:brightness-110" alt="Manny Batman">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute bottom-8 left-8 right-8">
+                <p class="text-[10px] tracking-[0.4em] text-blue-400 font-bold uppercase mb-1">Manny-Logic Generator</p>
+                <h2 id="excuse-text" class="syncopate text-xl italic uppercase">"I'm 5 mins away"</h2>
+            </div>
+            <button onclick="newExcuse()" class="absolute top-6 right-6 bg-blue-600 hover:bg-white hover:text-black px-4 py-2 rounded-full text-[9px] font-black tracking-widest uppercase transition-all">GENERATE EXCUSE</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="glass p-6 rounded-3xl flex items-center gap-5 border-l-4 border-blue-500">
+                <img src="IMG_2995.jpeg" class="w-20 h-20 rounded-2xl object-cover grayscale" alt="Phone Manny">
+                <div>
+                    <h3 class="text-[9px] uppercase font-black text-gray-500 tracking-widest">Late Tally</h3>
+                    <p class="text-3xl font-black italic"><span id="mins-count">0</span>m</p>
+                </div>
+            </div>
+            <div class="glass p-6 rounded-3xl flex flex-col justify-center items-center">
+                <p class="text-red-500 font-black text-2xl uppercase italic">Efficiency: 0.0%</p>
+                <p class="text-[9px] text-gray-600 uppercase tracking-widest mt-1">Status: Unresponsive</p>
+            </div>
+        </div>
+
+        <button onclick="showPage('ai-page')" class="w-full py-6 glass rounded-2xl syncopate text-[10px] tracking-[0.4em] hover:text-blue-400 transition-all uppercase border border-blue-900/30">
+            Initialize AI Ascension →
         </button>
     </div>
 
     <div id="ai-page" class="max-w-xl mx-auto space-y-8 py-10 hidden">
         <div class="space-y-4">
-            <button onclick="showPage('roast-page')" class="text-[10px] text-gray-500 hover:text-white uppercase tracking-widest">← Return to Reality</button>
+            <button onclick="showPage('roast-page')" class="text-[9px] text-gray-500 hover:text-white uppercase tracking-widest">← Back to Dashboard</button>
             <h1 class="syncopate text-3xl text-blue-400">AI ASCENSION</h1>
-            <p class="text-gray-400 leading-relaxed uppercase text-[11px] tracking-widest">Manny, the flooring industry is moving. You are currently standing still. Here is how you lock in with the future.</p>
+            <p class="text-gray-400 leading-relaxed uppercase text-[10px] tracking-widest">Manny, stop playing. The industry is evolving. Lock in.</p>
         </div>
 
         <div class="space-y-4">
             <div class="glass p-6 rounded-2xl border-l-4 border-blue-500">
-                <h3 class="font-black text-sm uppercase mb-2">01. Stop Searching. Start Prompting.</h3>
-                <p class="text-xs text-gray-500 leading-relaxed">Download **ChatGPT** or **Claude** on your phone. Instead of "how to fix a floor," tell it: "Act as a master contractor and optimize my schedule for a 500sqft install."</p>
+                <h3 class="font-black text-xs uppercase mb-2">01. Smart Quoting</h3>
+                <p class="text-[11px] text-gray-400">Use ChatGPT to calculate exact materials and labor margins for JCR Flooring in seconds. Stop guessing prices.</p>
             </div>
-
             <div class="glass p-6 rounded-2xl border-l-4 border-blue-500">
-                <h3 class="font-black text-sm uppercase mb-2">02. Automate the Excuses</h3>
-                <p class="text-xs text-gray-500 leading-relaxed">Use AI to draft your client emails and invoices while you're "5 minutes away." Let the machine handle the talk so you can handle the planks.</p>
+                <h3 class="font-black text-xs uppercase mb-2">02. Auto-Marketing</h3>
+                <p class="text-[11px] text-gray-400">Let AI write your Facebook and Instagram captions while you're on the way to the job site. Maximum presence, zero effort.</p>
             </div>
-
             <div class="glass p-6 rounded-2xl border-l-4 border-blue-500">
-                <h3 class="font-black text-sm uppercase mb-2">03. The Wichita Edge</h3>
-                <p class="text-xs text-gray-500 leading-relaxed">The person who uses AI beats the person who doesn't 10/10 times. Lock in or be left behind.</p>
+                <h3 class="font-black text-xs uppercase mb-2">03. The Edge</h3>
+                <p class="text-[11px] text-gray-400">A contractor with AI is a contractor who finishes early. Be that guy.</p>
             </div>
-        </div>
-
-        <div class="glass p-8 rounded-3xl text-center">
-            <p class="syncopate text-[10px] text-blue-400 animate-pulse">MISSION: ZERO LATENESS STARTING TOMORROW</p>
         </div>
     </div>
 
     <script>
-        function showPage(pageId) {
-            document.getElementById('roast-page').classList.add('hidden');
-            document.getElementById('ai-page').classList.add('hidden');
-            document.getElementById(pageId).classList.remove('hidden');
+        const excuses = ["I'm 5 mins away", "My phone didn't charge", "Had to stop for gas", "Kellogg traffic is crazy", "I'm pulling up now", "My alarm didn't go off"];
+        
+        function newExcuse() {
+            document.getElementById('excuse-text').innerText = `"${excuses[Math.floor(Math.random()*excuses.length)]}"`;
+            document.getElementById('hero-img').style.filter = "hue-rotate(180deg) brightness(1.5)";
+            setTimeout(() => { document.getElementById('hero-img').style.filter = "none"; }, 400);
+        }
+
+        function showPage(p) {
+            document.getElementById('roast-page').classList.toggle('hidden', p !== 'roast-page');
+            document.getElementById('ai-page').classList.toggle('hidden', p !== 'ai-page');
             window.scrollTo(0,0);
         }
 
         function update() {
-            const start = new Date();
-            start.setHours(8, 0, 0);
-            const diff = Math.floor((new Date() - start) / 60000);
-            document.getElementById('mins-count').innerText = diff > 0 ? diff : 0;
+            const now = new Date();
+            const start = new Date(); start.setHours(8, 0, 0);
+            const end = new Date(); end.setHours(17, 0, 0);
+            const total = end - start;
+            const elapsed = now - start;
+            const diffMins = Math.floor(elapsed / 60000);
+            
+            document.getElementById('mins-count').innerText = diffMins > 0 ? diffMins : 0;
+            if (elapsed > 0) {
+                let p = Math.min(Math.floor((elapsed / total) * 100), 100);
+                document.getElementById('progress-fill').style.width = p + "%";
+                document.getElementById('percent-label').innerText = p + "% OF SHIFT LOST";
+            }
         }
-        setInterval(update, 1000);
-        update();
+        setInterval(update, 1000); update();
     </script>
 </body>
 </html>
